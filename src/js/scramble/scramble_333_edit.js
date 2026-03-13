@@ -744,29 +744,66 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		return getAnyScramble(pllcase[0] + 0xba9876540000, 0x000000000000, pllcase[1] + 0x76540000, 0x00000000, neut, aufsuff, aufsuff);
 	}
 
-	// 3BLD corner 3-cycle trainer
-	// Buffer: corner 0 (UFR). Generates all 7*6*9 = 378 directed 3-cycles
-	// (all pairs of targets, all orientations with sum ≡ 0 mod 3, edges solved).
-	function get3BLDCornerScramble(type, length, cases, neut) {
-		var buf = 0;
-		var others = [1, 2, 3, 4, 5, 6, 7];
-		var t1 = others[rn(7)];
-		var rest = [];
-		for (var i = 0; i < others.length; i++) {
-			if (others[i] !== t1) rest.push(others[i]);
+	// 3BLD corner 3-cycle trainer (buffer = corner 0 = UFR)
+	// Pre-computes all 378 cases (7×6 directed pairs × 9 orientations, sum≡0 mod 3)
+	// into 8 J-Perm categories based on sticker types of the two non-buffer targets.
+	//
+	// Sticker type of (pos, co):
+	//   U-layer (pos<4): co=0 → U-top; co=2 & pos∈{1,3} → LUF/BUR; else → U-side
+	//   D-layer (pos≥4): co=0 → D-bottom; else → D-side
+	//
+	// Category index (unordered pair of sticker types):
+	//   0: U-side + D-any    1: U-top + D-side    2: U-any + U-any
+	//   3: D-side + D-side   4: U-top + D-bottom  5: LUF/BUR + D-any
+	//   6: D-side + D-bottom 7: D-bottom + D-bottom
+	var bld3cByCat = [[], [], [], [], [], [], [], []];
+	var bld3cFilter = [
+		'U-side + D-any', 'U-top + D-side', 'U + U',
+		'D-side + D-side', 'U-top + D-bottom', 'LUF/BUR + D-any',
+		'D-side + D-bottom', 'D-bottom + D-bottom'
+	];
+	(function() {
+		function sN(v, p, n) { var s = p * 4; return (v & ~(0xf << s)) | ((n & 0xf) << s); }
+		function st(pos, co) {
+			if (pos < 4) {
+				if (co === 0) return 0;
+				if (co === 2 && (pos === 1 || pos === 3)) return 2;
+				return 1;
+			}
+			return co === 0 ? 4 : 3;
 		}
-		var t2 = rest[rn(6)];
-		var co1 = rn(3), co2 = rn(3), co3 = (6 - co1 - co2) % 3;
-		function setN(v, p, n) { var s = p * 4; return (v & ~(0xf << s)) | ((n & 0xf) << s); }
-		var cp = 0x76543210;
-		cp = setN(cp, buf, t1);
-		cp = setN(cp, t1, t2);
-		cp = setN(cp, t2, buf);
-		var co = 0;
-		co = setN(co, buf, co1);
-		co = setN(co, t1, co2);
-		co = setN(co, t2, co3);
-		return getAnyScramble(0xba9876543210, 0x000000000000, cp, co, neut);
+		function cat(s1, s2) {
+			if (s1 <= 2 && s2 <= 2) return 2;
+			if (s1 === 2 || s2 === 2) return 5;
+			var a = Math.min(s1, s2), b = Math.max(s1, s2);
+			if (a === 0 && b === 3) return 1;
+			if (a === 0) return 4;
+			if (a === 1) return 0;
+			if (b === 3) return 3;
+			if (a === 3) return 6;
+			return 7;
+		}
+		for (var t1 = 1; t1 <= 7; t1++) {
+			for (var t2 = 1; t2 <= 7; t2++) {
+				if (t2 === t1) continue;
+				for (var oa = 0; oa < 3; oa++) {
+					for (var ob = 0; ob < 3; ob++) {
+						var oc = (6 - oa - ob) % 3;
+						var cp = 0x76543210;
+						cp = sN(cp, 0, t1); cp = sN(cp, t1, t2); cp = sN(cp, t2, 0);
+						var co = 0;
+						co = sN(co, 0, oa); co = sN(co, t1, ob); co = sN(co, t2, oc);
+						bld3cByCat[cat(st(t1, ob), st(t2, oc))].push([cp, co]);
+					}
+				}
+			}
+		}
+	})();
+	function make3BLDCat(catIdx) {
+		return function(type, length, cases, neut) {
+			var c = bld3cByCat[catIdx][rn(bld3cByCat[catIdx].length)];
+			return getAnyScramble(0xba9876543210, 0x000000000000, c[0], c[1], neut);
+		};
 	}
 
 	function getPLLImage(cases, canvas) {
@@ -1152,7 +1189,14 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		('coll', getCOLLScramble, [cofilter, coprobs, getCOLLImage.bind(null, 'D')])
 		('ell', getELLScramble)
 		('pll', getPLLScramble, [pllfilter, pllprobs, getPLLImage])
-		('3bld-corner', get3BLDCornerScramble)
+		('3bldc0', make3BLDCat(0))
+		('3bldc1', make3BLDCat(1))
+		('3bldc2', make3BLDCat(2))
+		('3bldc3', make3BLDCat(3))
+		('3bldc4', make3BLDCat(4))
+		('3bldc5', make3BLDCat(5))
+		('3bldc6', make3BLDCat(6))
+		('3bldc7', make3BLDCat(7))
 		('oll', getOLLScramble, [ollfilter, ollprobs, getOLLImage])
 		('2gll', get2GLLScramble)
 		('sbrx', getSBRouxScramble)

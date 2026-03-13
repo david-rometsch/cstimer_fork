@@ -204,11 +204,20 @@ var scrdata = [
 		['3x3x3 for noobs', "333noob", 25],
 		['edges only', "edges", 0],
 		['corners only', "corners", 0],
-		['3BLD corner', "3bld-corner", 0],
 		['BLD Helper', "nocache_333bldspec", 0],
 		['Pattern Tool', "nocache_333patspec", 0],
 		['3x3 ft', "333ft", 0],
 		['Custom', "333custom", 0]
+	]],
+	['3BLD corners', [
+		['U-side + D-any',     '3bldc0', 0],
+		['U-top + D-side',     '3bldc1', 0],
+		['U + U',              '3bldc2', 0],
+		['D-side + D-side',    '3bldc3', 0],
+		['U-top + D-bottom',   '3bldc4', 0],
+		['LUF/BUR + D-any',    '3bldc5', 0],
+		['D-side + D-bottom',  '3bldc6', 0],
+		['D-bottom + D-bottom','3bldc7', 0]
 	]],
 	['3x3x3 CFOP', [
 		['PLL', "pll", 0],
