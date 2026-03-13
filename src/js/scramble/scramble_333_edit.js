@@ -809,13 +809,13 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 	// Returns nibble i from a packed hex value
 	function nibble(v, i) { return (v >>> (i * 4)) & 0xf; }
 
-	// Composes two corner states (A then B): result[i] = B[A[i]]
+	// Composes two corner states (A then B): result[i] = cpA[cpB[i]]
 	function composeCycles(cpA, coA, cpB, coB) {
 		var cpR = 0, coR = 0;
 		for (var i = 0; i < 8; i++) {
-			var a = nibble(cpA, i);
-			cpR |= (nibble(cpB, a) << (i * 4));
-			coR |= (((nibble(coA, i) + nibble(coB, a)) % 3) << (i * 4));
+			var b = nibble(cpB, i);
+			cpR |= (nibble(cpA, b) << (i * 4));
+			coR |= (((nibble(coA, b) + nibble(coB, i)) % 3) << (i * 4));
 		}
 		return [cpR, coR];
 	}
@@ -1285,6 +1285,7 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		getCLLScramble: getCLLScramble,
 		getELLScramble: getELLScramble,
 		getAnyScramble: getAnyScramble,
+		composeCycles: composeCycles,
 		getPLLImage: getPLLImage,
 		getOLLImage: getOLLImage,
 		getCOLLImage: getCOLLImage,

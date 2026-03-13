@@ -80,6 +80,7 @@ var TOOLS_RECONS_NODATA = 'No solution found.';
 var TOOLS_RECONS_TITLE = 'insp|exec|turn|tps';
 var TOOLS_TRAINSTAT = 'Training Stat.';
 var TOOLS_BLDHELPER = 'BLD Helper';
+var TOOLS_BLDLPTRAINER = '3BLD letterpairs';
 var TOOLS_CFMTIME = 'Confirm time';
 var TOOLS_SOLVERS = 'Solvers';
 var TOOLS_DLYSTAT = 'Daily Statistics';
@@ -205,6 +206,7 @@ var scrdata = [
 		['edges only', "edges", 0],
 		['corners only', "corners", 0],
 		['BLD Helper', "nocache_333bldspec", 0],
+		['3BLD letterpairs', "nocache_333bldlp", 0],
 		['Pattern Tool', "nocache_333patspec", 0],
 		['3x3 ft', "333ft", 0],
 		['Custom', "333custom", 0]
