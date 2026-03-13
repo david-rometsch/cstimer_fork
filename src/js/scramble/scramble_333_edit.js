@@ -806,6 +806,45 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		};
 	}
 
+	// Returns nibble i from a packed hex value
+	function nibble(v, i) { return (v >>> (i * 4)) & 0xf; }
+
+	// Composes two corner states (A then B): result[i] = B[A[i]]
+	function composeCycles(cpA, coA, cpB, coB) {
+		var cpR = 0, coR = 0;
+		for (var i = 0; i < 8; i++) {
+			var a = nibble(cpA, i);
+			cpR |= (nibble(cpB, a) << (i * 4));
+			coR |= (((nibble(coA, i) + nibble(coB, a)) % 3) << (i * 4));
+		}
+		return [cpR, coR];
+	}
+
+	// 3BLD multi-cycle: picks as many non-overlapping cycles as possible from one category
+	function make3BLDMultiCycle(catIdx) {
+		return function(type, length, cases, neut) {
+			var used = {};
+			var cpResult = 0x76543210, coResult = 0x00000000;
+			while (true) {
+				var pool = bld3cByCat[catIdx];
+				var valid = [];
+				for (var i = 0; i < pool.length; i++) {
+					var t1 = nibble(pool[i][0], 0);
+					var t2 = nibble(pool[i][0], t1);
+					if (!used[t1] && !used[t2]) valid.push(pool[i]);
+				}
+				if (valid.length === 0) break;
+				var c = valid[rn(valid.length)];
+				var t1 = nibble(c[0], 0);
+				var t2 = nibble(c[0], t1);
+				used[t1] = used[t2] = true;
+				var comp = composeCycles(cpResult, coResult, c[0], c[1]);
+				cpResult = comp[0]; coResult = comp[1];
+			}
+			return getAnyScramble(0xba9876543210, 0x000000000000, cpResult, coResult, neut);
+		};
+	}
+
 	function getPLLImage(cases, canvas) {
 		var arrows = pllImgParam[cases].slice(1);
 		if (arrows.length == 2) {
@@ -1197,6 +1236,14 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		('3bldc5', make3BLDCat(5))
 		('3bldc6', make3BLDCat(6))
 		('3bldc7', make3BLDCat(7))
+		('3bldmc0', make3BLDMultiCycle(0))
+		('3bldmc1', make3BLDMultiCycle(1))
+		('3bldmc2', make3BLDMultiCycle(2))
+		('3bldmc3', make3BLDMultiCycle(3))
+		('3bldmc4', make3BLDMultiCycle(4))
+		('3bldmc5', make3BLDMultiCycle(5))
+		('3bldmc6', make3BLDMultiCycle(6))
+		('3bldmc7', make3BLDMultiCycle(7))
 		('oll', getOLLScramble, [ollfilter, ollprobs, getOLLImage])
 		('2gll', get2GLLScramble)
 		('sbrx', getSBRouxScramble)

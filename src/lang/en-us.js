@@ -219,6 +219,16 @@ var scrdata = [
 		['D-side + D-bottom',  '3bldc6', 0],
 		['D-bottom + D-bottom','3bldc7', 0]
 	]],
+	['3BLD multi-cycle', [
+		['U-side + D-any',     '3bldmc0', 0],
+		['U-top + D-side',     '3bldmc1', 0],
+		['U + U',              '3bldmc2', 0],
+		['D-side + D-side',    '3bldmc3', 0],
+		['U-top + D-bottom',   '3bldmc4', 0],
+		['LUF/BUR + D-any',    '3bldmc5', 0],
+		['D-side + D-bottom',  '3bldmc6', 0],
+		['D-bottom + D-bottom','3bldmc7', 0]
+	]],
 	['3x3x3 CFOP', [
 		['PLL', "pll", 0],
 		['OLL', "oll", 0],
