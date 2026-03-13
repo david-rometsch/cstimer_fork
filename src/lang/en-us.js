@@ -204,6 +204,7 @@ var scrdata = [
 		['3x3x3 for noobs', "333noob", 25],
 		['edges only', "edges", 0],
 		['corners only', "corners", 0],
+		['3BLD corner', "3bld-corner", 0],
 		['BLD Helper', "nocache_333bldspec", 0],
 		['Pattern Tool', "nocache_333patspec", 0],
 		['3x3 ft', "333ft", 0],

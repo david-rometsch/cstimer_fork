@@ -744,6 +744,31 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		return getAnyScramble(pllcase[0] + 0xba9876540000, 0x000000000000, pllcase[1] + 0x76540000, 0x00000000, neut, aufsuff, aufsuff);
 	}
 
+	// 3BLD corner 3-cycle trainer
+	// Buffer: corner 0 (UFR). Generates all 7*6*9 = 378 directed 3-cycles
+	// (all pairs of targets, all orientations with sum ≡ 0 mod 3, edges solved).
+	function get3BLDCornerScramble(type, length, cases, neut) {
+		var buf = 0;
+		var others = [1, 2, 3, 4, 5, 6, 7];
+		var t1 = others[rn(7)];
+		var rest = [];
+		for (var i = 0; i < others.length; i++) {
+			if (others[i] !== t1) rest.push(others[i]);
+		}
+		var t2 = rest[rn(6)];
+		var co1 = rn(3), co2 = rn(3), co3 = (6 - co1 - co2) % 3;
+		function setN(v, p, n) { var s = p * 4; return (v & ~(0xf << s)) | ((n & 0xf) << s); }
+		var cp = 0x76543210;
+		cp = setN(cp, buf, t1);
+		cp = setN(cp, t1, t2);
+		cp = setN(cp, t2, buf);
+		var co = 0;
+		co = setN(co, buf, co1);
+		co = setN(co, t1, co2);
+		co = setN(co, t2, co3);
+		return getAnyScramble(0xba9876543210, 0x000000000000, cp, co, neut);
+	}
+
 	function getPLLImage(cases, canvas) {
 		var arrows = pllImgParam[cases].slice(1);
 		if (arrows.length == 2) {
@@ -1127,6 +1152,7 @@ var scramble_333 = (function(getNPerm, setNPerm, getNParity, rn, rndEl) {
 		('coll', getCOLLScramble, [cofilter, coprobs, getCOLLImage.bind(null, 'D')])
 		('ell', getELLScramble)
 		('pll', getPLLScramble, [pllfilter, pllprobs, getPLLImage])
+		('3bld-corner', get3BLDCornerScramble)
 		('oll', getOLLScramble, [ollfilter, ollprobs, getOLLImage])
 		('2gll', get2GLLScramble)
 		('sbrx', getSBRouxScramble)
