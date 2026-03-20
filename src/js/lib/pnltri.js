@@ -1015,6 +1015,7 @@ PNLTRI.QueryStructure.prototype = {
 						}
 					}
 				} else {
+/*						if ( ( PNLTRI.Math.compare_pts_yx( ptMain, qsNode.seg.vFrom ) *
 							PNLTRI.Math.compare_pts_yx( ptMain, qsNode.seg.vTo )
 						   ) == 0 ) {
 						console.log("ptNode: Pts too close together#2: ", ptMain, qsNode.seg );

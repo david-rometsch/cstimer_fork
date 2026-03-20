@@ -3,6 +3,20 @@
 Professional Speedcubing/Training Timer
 
 
+# Running Locally
+
+The `dist/` folder contains the pre-compiled application. A PHP built-in server is required.
+
+```bash
+cd dist
+php -S localhost:8000
+```
+
+Then open [http://localhost:8000/timer.php](http://localhost:8000/timer.php) in your browser.
+
+> **Note:** Some features (stackmat timer, WCA login) require HTTPS and will not work over HTTP.
+
+
 # Versions and Update Policy
 
 Main version: https://cstimer.net/
