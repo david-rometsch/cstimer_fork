@@ -1452,7 +1452,6 @@ jQuery.support = (function() {
 		support.boxSizing = ( div.offsetWidth === 4 );
 		support.doesNotIncludeMarginInBodyOffset = ( body.offsetTop !== 1 );
 
-		// NOTE: To any future maintainer, window.getComputedStyle was used here
 		// instead of getComputedStyle because it gave a better gzip size.
 		// The difference between window.getComputedStyle and getComputedStyle is
 		// 7 bytes
@@ -2886,7 +2885,6 @@ jQuery.event = {
 		// Handle a global trigger
 		if ( !elem ) {
 
-			// TODO: Stop taunting the data cache; remove global events and always attach to document
 			cache = jQuery.cache;
 			for ( i in cache ) {
 				if ( cache[ i ].events && cache[ i ].events[ type ] ) {
@@ -6604,7 +6602,6 @@ jQuery.extend({
 	}
 });
 
-// NOTE: To any future maintainer, we've used both window.getComputedStyle
 // and getComputedStyle here to produce a better gzip size
 if ( window.getComputedStyle ) {
 	curCSS = function( elem, name ) {

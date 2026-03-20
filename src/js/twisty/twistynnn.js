@@ -207,7 +207,6 @@
 			var state = twisty.cubePieces;
 
 			// Support negative layer indices (e.g. for rotations)
-			//TODO: Bug 20110906, if negative index ends up the same as start index, the animation is iffy.
 			var layerStart = currentMove[0];
 			var layerEnd = currentMove[1];
 			if (layerEnd < 0) {

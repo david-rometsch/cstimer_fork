@@ -420,7 +420,6 @@ PNLTRI.PolygonData.prototype = {
 			monoPosmax = find_monotone_chain_max( frontMono );
 			if ( monoPosmax )	this.monoSubPolyChains.push( monoPosmax );
 		}
-		// loop through all additional segments (diagonals)			// TODO: Testcase for mono chain without original segments !!!
 /*		for ( var i = 0, j = this.diagonals.length; i < j; i++ ) {
 			frontMono = this.diagonals[i];
 			if ( frontMono.marked )		continue;		// already in a processed mono chain
@@ -931,7 +930,6 @@ PNLTRI.QueryStructure.prototype = {
 		this.ptNode( inSegment, false );
 	},
 
-	// TODO: may need to prevent infinite loop in case of messed up
 	//	trapezoid structure (s. test_add_segment_special_6)
 
 	ptNode: function ( inSegment, inUseFrom ) {
@@ -1017,7 +1015,6 @@ PNLTRI.QueryStructure.prototype = {
 						}
 					}
 				} else {
-/*					if ( ( PNLTRI.Math.compare_pts_yx( ptMain, qsNode.seg.vFrom ) *			// TODO: Testcase
 							PNLTRI.Math.compare_pts_yx( ptMain, qsNode.seg.vTo )
 						   ) == 0 ) {
 						console.log("ptNode: Pts too close together#2: ", ptMain, qsNode.seg );
@@ -1275,7 +1272,6 @@ PNLTRI.QueryStructure.prototype = {
 						//   - - - -+--*----
 						//			 +
 						//		  next
-//						if ( inTrNext.uR != trNewRight ) {		// for robustness	TODO: prevent
 							inTrNext.usave = inTrNext.uR;
 							inTrNext.uleft = true;
 							// trNewLeft: L/R undefined, will be extended down and changed anyway
@@ -1292,7 +1288,6 @@ PNLTRI.QueryStructure.prototype = {
 						//   ---*---+- - - -
 						//		   +
 						//		  next
-//						if ( inTrNext.uL != trNewLeft ) {		// for robustness	TODO: prevent
 							inTrNext.usave = inTrNext.uL;
 							inTrNext.uleft = false;
 							// trNewRight: L/R undefined, will be extended down and changed anyway
@@ -1425,7 +1420,6 @@ PNLTRI.QueryStructure.prototype = {
 							//    - - - -*-------
 							//	  C.dL	+/  C.dR
 							//		   +/
-							goDownRight = false;		// TODO: for test_add_segment_special_4 -> like intersecting dL
 						}
 					}
 				}
@@ -1495,7 +1489,6 @@ PNLTRI.QueryStructure.prototype = {
 		}
 		var trFirst = segHighNode.trap;		// top-most trapezoid for this segment
 
-		// check for robustness		// TODO: prevent
 		if ( !trFirst.uL && !trFirst.uR ) {
 			console.log("ERR add_segment: missing trFirst.uX: ", trFirst );
 			return;
@@ -1549,8 +1542,6 @@ PNLTRI.QueryStructure.prototype = {
 			//  by extending the trPrevRight or trPrevLeft down
 			//  and redirecting the parent X-Node to the extended sink
 			// !!! destroys tree structure since several nodes now point to the same SINK-Node !!!
-			// TODO: maybe it's not a problem;
-			//  merging of X-Nodes is no option, since they are used as "rootFrom/rootTo" !
 			//
 			if ( trPrevRight && ( trPrevRight.rseg == trCurrent.rseg ) ) {
 				// console.log( "add_segment: extending right predecessor down!", trPrevRight );
