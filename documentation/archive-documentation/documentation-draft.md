@@ -1,0 +1,29 @@
+- user requirements
+	- use case
+	- special new scramble type(s)
+	- integration in preexistint sovtware
+	- 3bld scrambeles devided in categorys
+- system requirements
+	- functional
+		- 2 selectionn fields are used
+	- non functional
+		- performant
+		- generate 378 scrambles rather than mapp them all. 
+		- integration in software
+- architecture
+	- which modules are touched?
+	- what is their function?
+	- information flow
+	- central file: scramble_333_edit.js
+	- flow of information
+		- map 
+		- register
+		- call scrambler
+		- other? 
+	- sequence diagram
+- testing
+	- are the initial requirements fullfilled?
+
+- offen
+	- analyse war ein grosser teil dieser arbeit - wo und wie kommt das hin? 
+	- damit verbunden system context diagramm. 

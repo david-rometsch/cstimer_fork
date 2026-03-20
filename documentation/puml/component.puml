@@ -1,0 +1,27 @@
+@startuml
+skinparam componentStyle rectangle
+
+rectangle "csTimer" {
+    component "UI\n(Drop-down selectors)" as UI
+    component "scrMgr\n(scramble dispatcher)" as scrMgr
+    component "mathlib.js\n(min2phase solver)" as Mathlib
+
+    rectangle "scramble_333_edit.js" {
+        component "make3BLDCat(catIdx)" as Cat
+        component "make3BLDMultiCycle(catIdx)" as Multi
+        component "bld3cByCat<8>" as Data
+        component "getAnyScramble(cp, co)" as GAS
+    }
+}
+
+UI --> scrMgr : key "3bldc{i}" / "3bldmc{i}"
+scrMgr --> Cat   : registered scrambler
+scrMgr --> Multi : registered scrambler
+Cat   --> Data   : read random case
+Multi --> Data   : filter non-overlapping cycles
+Cat   --> GAS
+Multi --> GAS    : composed cube state
+GAS   --> Mathlib : corner permutation + orientation
+Mathlib --> UI   : move sequence (scramble string)
+
+@enduml

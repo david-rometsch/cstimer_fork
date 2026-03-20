@@ -1,0 +1,19 @@
+@startuml
+actor Cuber as user
+participant "csTimer UI" as UI
+participant "scrMgr" as Mgr
+participant "scramble_333_edit.js" as S333
+participant "mathlib.js\n(min2phase)" as Math
+
+user -> UI   : select "3BLD" + category in drop-downs
+UI   -> Mgr  : trigger scrambler key "3bldc{i}"
+Mgr  -> S333 : make3BLDCat(catIdx)()
+
+S333 -> S333 : pick random [cp, co]\nfrom bld3cByCat[catIdx]
+S333 -> Math : getAnyScramble(cp, co)
+Math -> Math : solve corner constellation\nvia pruning tables
+Math --> S333 : move sequence
+S333 --> UI  : scramble string
+UI   --> user : display scramble
+
+@enduml

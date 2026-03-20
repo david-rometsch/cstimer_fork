@@ -1,0 +1,21 @@
+/' ablauf:
+ - entry: chose "enter letterpairs"
+  
+
+ '/ 
+
+
+@startuml
+start  /' my cstimer plugin gets choosen in drop down'/
+:read LP-list in array;
+:randomly pop 1st LP from array;
+while (more LPs possible?) is (yes)
+fork
+  :pop next LP ;
+fork again
+  :pop place from available corners;
+end fork
+endwhile (no)
+stop
+@enduml
+

@@ -1,0 +1,27 @@
+@startuml
+start
+
+:User selects 3BLD + category (0–7) in UI;
+
+if (multi-cycle mode?) then (yes)
+    :Initialize empty cube state (cp=identity, co=0);
+    :Initialize empty used-corners set;
+
+    while (valid cycles remain in category pool?) is (yes)
+        :Filter pool: discard cycles\nthat share a corner with used set;
+        :Pick random cycle from valid pool;
+        :Compose cycle onto current cube state\n(composeCycles);
+        :Mark both target corners as used;
+    endwhile (no valid cycles left)
+
+else (no — single-cycle mode)
+    :Pick random [cp, co] from bld3cByCat[catIdx];
+endif
+
+:Call getAnyScramble(cp, co);
+:min2phase solves the corner constellation;
+:Return move sequence string;
+:Display scramble in UI;
+
+stop
+@enduml

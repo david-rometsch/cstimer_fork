@@ -1,0 +1,23 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+actor "3BLD-Cuber" as cuber
+
+rectangle csTimer {
+    rectangle "3BLD Corner Trainer" {
+        usecase "Select 3BLD\nscramble type" as UC1
+        usecase "Select category\n(0–7)" as UC2
+        usecase "Receive scramble\nsequence" as UC5
+        usecase "Solve the case" as UC6
+    }
+}
+
+cuber --> UC1
+cuber --> UC2
+cuber --> UC6
+
+UC1 ..> UC2 : <<then>>
+/'UC5 ..> UC6 : <<include>>'/
+
+@enduml
