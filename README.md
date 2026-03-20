@@ -16,6 +16,14 @@ Then open [http://localhost:8000/timer.php](http://localhost:8000/timer.php) in 
 
 > **Note:** Some features (stackmat timer, WCA login) require HTTPS and will not work over HTTP.
 
+### After changing source files
+
+If you modify anything in `src/`, recompile before running (requires Java):
+
+```bash
+make
+```
+
 
 # Versions and Update Policy
 
