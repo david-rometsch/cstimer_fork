@@ -15,7 +15,6 @@ Learning 378 corner commutators, ready to use fast in a speedsolve, is quite an 
 It is a huge difference when you can learn a number of commutators such as 48 or even 96 in one take.
 With this new mindset, I soon came to the conclusion that for my success I only need to have the right training program. Not finding any existing implementation, I decided to create my own version.
 
-
 ---
 
 ## 2. Analysis of the Pre-existing System
@@ -52,6 +51,7 @@ This module is the actual scrambler core of csTimer. It is based on a Java → J
 I had used min2phase in a Python project earlier, so there was some familiarity with its usage.
 
 There are two types of scramble generation:
+
 - completely random
 - scramble to a specific cube state (my case)
 
@@ -97,26 +97,26 @@ In section 3.1 the requirements are shown from a user's perspective, then in 3.2
 ### 3.1 User Requirements
 
 This diagram shows how the user selects the new mode and uses it to train 3BLD corner commutators:
-![Use Case Diagram](use-case.svg)
+![Use Case Diagram](puml/svg/use-case.svg)
 
 The following goals represent the user's perspective and form the basis for the functional and non-functional requirements below.
 
-| ID | User Requirement |
-|----|-----------------|
-| UR1 | I want to practice corner commutators so I can improve my 3BLD execution |
-| UR2 | I want to focus on a specific difficulty category so I can train systematically |
-| UR3 | I want to train multi-comm sequences so I can practice realistic BLD scenarios |
+| ID  | User Requirement                                                                   |
+| --- | ---------------------------------------------------------------------------------- |
+| UR1 | I want to practice corner commutators so I can improve my 3BLD execution           |
+| UR2 | I want to focus on a specific difficulty category so I can train systematically    |
+| UR3 | I want to train multi-comm sequences so I can practice realistic BLD scenarios     |
 | UR4 | I want the tool to feel like the rest of csTimer so I don't need to learn a new UI |
 
 ### 3.2 Functional Requirements
 
 The functional requirements specify what the system must do.
 
-| ID | Requirement | Ref |
-|----|-------------|-----|
-| FR1 | Generate valid 3BLD corner permutation scrambles | UR1 |
-| FR2 | Divide the 378 cases into 8 sticker-type categories | UR2 |
-| FR3 | Select a case randomly within the chosen category | UR2 |
+| ID  | Requirement                                               | Ref |
+| --- | --------------------------------------------------------- | --- |
+| FR1 | Generate valid 3BLD corner permutation scrambles          | UR1 |
+| FR2 | Divide the 378 cases into 8 sticker-type categories       | UR2 |
+| FR3 | Select a case randomly within the chosen category         | UR2 |
 | FR4 | Support multi-cycle mode (multiple non-overlapping comms) | UR3 |
 | FR5 | Register all 16 types in the existing csTimer scramble UI | UR4 |
 
@@ -124,12 +124,12 @@ The functional requirements specify what the system must do.
 
 The non-functional requirements define quality constraints on the implementation.
 
-| ID | Requirement | Detail | Ref |
-|----|-------------|--------|-----|
-| NFR1 | Performance: scramble generation imperceptible to the user | <10 ms per scramble; cases pre-classified at module load, sequence computed on demand by mathlib.js — not from a precomputed string table | UR1, UR3 |
-| NFR2 | Usability: no new UI components | Feature appears in the existing two-field drop-down without visual or behavioural differences | UR4 |
-| NFR3 | Maintainability: new code confined to `scramble_333_edit.js` and `tools/` | No changes to mathlib.js or the scramble dispatcher | UR1–3 |
-| NFR4 | Compatibility: no breaking changes to existing scramblers | | UR4 |
+| ID   | Requirement                                                               | Detail                                                                                                                                    | Ref      |
+| ---- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| NFR1 | Performance: scramble generation imperceptible to the user                | <10 ms per scramble; cases pre-classified at module load, sequence computed on demand by mathlib.js — not from a precomputed string table | UR1, UR3 |
+| NFR2 | Usability: no new UI components                                           | Feature appears in the existing two-field drop-down without visual or behavioural differences                                             | UR4      |
+| NFR3 | Maintainability: new code confined to `scramble_333_edit.js` and `tools/` | No changes to mathlib.js or the scramble dispatcher                                                                                       | UR1–3    |
+| NFR4 | Compatibility: no breaking changes to existing scramblers                 |                                                                                                                                           | UR4      |
 
 ---
 
@@ -156,33 +156,40 @@ This component diagram shows how the components cooperate. The implemented featu
 
 ### 4.1 Module Responsibilities
 
-| Module | Responsibility |
-|--------|---------------|
-| `scramble_333_edit.js` | Defines and registers all scramble generators; calls `scrMgr.reg()` to expose them to the UI |
-| `scrMgr` (scramble.js) | Provides the registry — `scrMgr.reg()` is defined here, called from `scramble_333_edit.js` |
-| `mathlib.js` | Solver core; called by `scramble_333_edit.js` to generate the move sequence from a target cube state |
-| `en-us.js` | Maps scrambler IDs to display names shown in the dropdown (so far only implemented in English) |
+| Module                 | Responsibility                                                                                       |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- |
+| `scramble_333_edit.js` | Defines and registers all scramble generators; calls `scrMgr.reg()` to expose them to the UI         |
+| `scrMgr` (scramble.js) | Provides the registry — `scrMgr.reg()` is defined here, called from `scramble_333_edit.js`           |
+| `mathlib.js`           | Solver core; called by `scramble_333_edit.js` to generate the move sequence from a target cube state |
+| `en-us.js`             | Maps scrambler IDs to display names shown in the dropdown (so far only implemented in English)       |
 
 ### 4.2 Integration Point: Scramble Registration
 
 Making a new scramble type appear in the UI requires two separate steps in two different files:
 
 **1. Register the generator function** (`scramble_333_edit.js`):
+
 ```js
-scrMgr.reg('3bldc0', make3BLDCat(0))
-       ('3bldc1', make3BLDCat(1))
-       // ...
+scrMgr.reg("3bldc0", make3BLDCat(0))("3bldc1", make3BLDCat(1));
+// ...
 ```
+
 This makes the scrambler callable by ID, but it does not appear in the UI yet.
 
 **2. Define the dropdown entry** (`en-us.js`):
+
 ```js
-['3BLD corners', [              // ← left dropdown (group name)
-    ['U-side + D-any', '3bldc0', 0],  // ← right dropdown (label + ID)
-    ['U-top + D-side', '3bldc1', 0],
+[
+  "3BLD corners",
+  [
+    // ← left dropdown (group name)
+    ["U-side + D-any", "3bldc0", 0], // ← right dropdown (label + ID)
+    ["U-top + D-side", "3bldc1", 0],
     // ...
-]]
+  ],
+];
 ```
+
 Only after this entry exists does "3BLD corners" appear in the left selector. The ID must match exactly between both files.
 
 ---
@@ -190,9 +197,10 @@ Only after this entry exists does "3BLD corners" appear in the left selector. Th
 ## 5. Process / Algorithm
 
 As the activity diagram shows, the multi-cycle feature is more complex, as the available corners need to be tracked:
-![Activity Diagram](activity.svg)
+![Activity Diagram](puml/svg/activity.svg)
 
 **Procedure:**
+
 1. User selects "3BLD" + category in UI
 2. Scramble dispatcher calls the registered generator
 3. Generator selects a random commutator from the category
@@ -211,7 +219,7 @@ The 8 corner commutator categories are functional categories from the perspectiv
 ## 6. Module Communication
 
 This sequence diagram shows the tool chain used to call the new 3BLD feature (single cycle mode):
-![Sequence Diagram](sequence.svg)
+![Sequence Diagram](puml/svg/sequence.svg)
 
 The category filter happens entirely inside `make3BLDCat` — mathlib.js receives only the final `[cp, co]` pair and has no knowledge of categories.
 
@@ -321,6 +329,7 @@ The tests live in `npm_export/testbench/test-3bld.js` and cover the core logic o
 
 **Test 1 — Category population**
 Rebuilds `bld3cByCat` from the same logic as the source and asserts:
+
 - total case count = 378 (= 7 × 6 × 3 × 3)
 - all 8 categories are non-empty
 
@@ -333,16 +342,16 @@ Requires the compiled module — skips gracefully if not built.
 
 ### 8.2 Requirements Verification
 
-| ID | Requirement | Verified by |
-|----|-------------|-------------|
-| FR1 | Generate valid 3BLD corner permutation scrambles | Test 3 — all 16 types return valid WCA move strings |
-| FR2 | Divide the 378 cases into 8 categories | Test 1 — total count = 378, all 8 buckets non-empty |
-| FR3 | Select a case randomly within the chosen category | Test 1 — random pick from category pool confirmed |
-| FR4 | Support multi-cycle mode | Test 3 — `3bldmc0–7` all return valid scrambles |
-| FR5 | Register all 16 types in the existing UI | Test 3 — all 16 IDs callable via `cstimer.getScramble()` |
-| NFR1 | Scramble generation < 10 ms | Test 3 — no timeouts observed; mathlib solves in ~1–5 ms |
-| NFR3 | No changes to mathlib.js or dispatcher | Confirmed by git diff — only `scramble_333_edit.js`, `en-us.js`, `bldlptrainer.js` touched |
-| NFR4 | No breaking changes to existing scramblers | Confirmed — all pre-existing registrations unchanged |
+| ID   | Requirement                                       | Verified by                                                                                |
+| ---- | ------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| FR1  | Generate valid 3BLD corner permutation scrambles  | Test 3 — all 16 types return valid WCA move strings                                        |
+| FR2  | Divide the 378 cases into 8 categories            | Test 1 — total count = 378, all 8 buckets non-empty                                        |
+| FR3  | Select a case randomly within the chosen category | Test 1 — random pick from category pool confirmed                                          |
+| FR4  | Support multi-cycle mode                          | Test 3 — `3bldmc0–7` all return valid scrambles                                            |
+| FR5  | Register all 16 types in the existing UI          | Test 3 — all 16 IDs callable via `cstimer.getScramble()`                                   |
+| NFR1 | Scramble generation < 10 ms                       | Test 3 — no timeouts observed; mathlib solves in ~1–5 ms                                   |
+| NFR3 | No changes to mathlib.js or dispatcher            | Confirmed by git diff — only `scramble_333_edit.js`, `en-us.js`, `bldlptrainer.js` touched |
+| NFR4 | No breaking changes to existing scramblers        | Confirmed — all pre-existing registrations unchanged                                       |
 
 ---
 
@@ -358,6 +367,7 @@ cd npm_export && node testbench/test-3bld.js
 ```
 
 Expected output (without built module):
+
 ```
 Test 1: Category population (378 cases across 8 categories)
   PASS: Total case count is 378 (got 378)
@@ -377,6 +387,7 @@ Test 3: Integration — scramble output is a valid WCA move string
 I underestimated the difficulty of implementing a feature in an existing open-source project. This is due to the nature of the project — it grew over time through community contributions from different developers with different styles. Although there is a readme explaining how to use the scrambles in a terminal, there is not much about implementing a new feature as I did.
 
 The following strategies led to success:
+
 - Having a running frontend, so I could make tryouts and see their effect
 - Using PLL and COLL as examples for how existing features are structured
 - Studying git commits for PLL to see how a new feature was implemented (though csTimer has changed since then, so this was not a 1:1 comparison)
