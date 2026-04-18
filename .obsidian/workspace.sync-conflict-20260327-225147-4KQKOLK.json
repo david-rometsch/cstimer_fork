@@ -1,0 +1,260 @@
+{
+  "main": {
+    "id": "6ed9f57017c17e4e",
+    "type": "split",
+    "children": [
+      {
+        "id": "1897a96914accb24",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "020430ac8a0ec43b",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/tutorial.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "tutorial.excalidraw"
+            }
+          },
+          {
+            "id": "fb006c7a0c36f80b",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/shop-incl-detail.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "shop-incl-detail.excalidraw"
+            }
+          },
+          {
+            "id": "74a5c1d7a2d68ad3",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/checkout-procedure.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "checkout-procedure.excalidraw"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2280dfa77a8e2823",
+    "type": "split",
+    "children": [
+      {
+        "id": "4998f23032f71d96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "835b4df85a9f4213",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7b002f87642557c7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "b50d271fab7edfd5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 244.5
+  },
+  "right": {
+    "id": "545d12906d185e4e",
+    "type": "split",
+    "children": [
+      {
+        "id": "35f032e55bf465a7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7aa9d7bf4e3aaf0f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "javascript/fetch-json-js.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for fetch-json-js"
+            }
+          },
+          {
+            "id": "7fd7835980a0d8f8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "javascript/fetch-json-js.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from fetch-json-js"
+            }
+          },
+          {
+            "id": "cfc9130fd01c0709",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "49dfc16f244a6111",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "ad43609396b2d0c0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "UI-UX/Transferarbeit.pdf",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Transferarbeit"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 366.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
+    }
+  },
+  "active": "74a5c1d7a2d68ad3",
+  "lastOpenFiles": [
+    "webe-rometsch/ui-ux/images/tutorial.svg",
+    "webe-rometsch/ui-ux/images/shop-incl-detail.svg",
+    "webe-rometsch/ui-ux/images/mit-fitelity-wf-complete.svg",
+    "webe-rometsch/ui-ux/images/checkout-procedure.svg",
+    "webe-rometsch/ui-ux/images/tutorial.excalidraw.svg",
+    "webe-rometsch/ui-ux/images/shop-incl-detail.excalidraw.svg",
+    "webe-rometsch/ui-ux/images/mit-fitelity-wf-complete.excalidraw.svg",
+    "webe-rometsch/ui-ux/images/checkout-procedure.excalidraw.svg",
+    "Excalidraw/tutorial.excalidraw.svg",
+    "Excalidraw/shop-incl-detail.excalidraw.svg",
+    "Excalidraw/checkout-procedure.excalidraw.svg",
+    "Excalidraw/shop-incl-detail.excalidraw.md",
+    "Excalidraw/checkout-procedure.excalidraw.md",
+    "Excalidraw/tutorial.excalidraw.md",
+    "Excalidraw/mit-fitelity-wf-complete.excalidraw.md",
+    "Excalidraw/mid-fidelity-wf.excalidraw.md",
+    "webe-rometsch/ui-ux/wireframe/tools-empfehlung.md",
+    "webe-rometsch/ui-ux/wireframe/Navigation.md",
+    "webe-rometsch/ui-ux/puml/use-case.puml",
+    "webe-rometsch/ui-ux/puml/ia2.puml",
+    "webe-rometsch/ui-ux/puml/ia.puml",
+    "webe-rometsch/ui-ux/images/archive",
+    "webe-rometsch/ui-ux/archive/typ-templ.typ",
+    "webe-rometsch/ui-ux/archive/cubing-site.typ",
+    "webe-rometsch/ui-ux/archive/cubing-site (2varianten usability).typ",
+    "webe-rometsch/ui-ux/wireframe",
+    "webe-rometsch/ui-ux/ui-cards.excalidraw",
+    "webe-rometsch/ui-ux/ui-cards-alex.excalidraw",
+    "webe-rometsch/ui-ux/transferarbeit-notes.md",
+    "webe-rometsch/ui-ux/shop-checkout.md",
+    "webe-rometsch/ui-ux/payment-redirect-popup.md",
+    "webe-rometsch/ui-ux/mid-fidelity.md",
+    "webe-rometsch/ui-ux/lofi.md",
+    "webe-rometsch/ui-ux/interactive-prototype.md",
+    "webe-rometsch/ui-ux/card sorting.md",
+    "webe-rometsch/ui-ux/anfrage.md",
+    "webe-rometsch/ui-ux/SMART.md",
+    "webe-rometsch/ui-ux/Interview Fragen.md",
+    "ui-ux/wireframe/tools-empfehlung.md",
+    "ui-ux/wireframe/Navigation.md",
+    "ui-ux/transferarbeit-notes.md",
+    "ui-ux/shop-checkout.md",
+    "ui-ux/payment-redirect-popup.md",
+    "ui-ux/mid-fidelity.md",
+    "ui-ux/lofi.md",
+    "ui-ux/interactive-prototype.md"
+  ]
+}

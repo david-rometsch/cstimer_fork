@@ -258,6 +258,12 @@ var scrdata = [
     ],
   ],
   [
+    "3BLD multi-cycle (mixed)",
+    [
+      ["mixed categories", "3bldmcmulti", 0],
+    ],
+  ],
+  [
     "3x3x3 CFOP",
     [
       ["PLL", "pll", 0],

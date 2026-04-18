@@ -1,6 +1,0 @@
-@startuml
-  skinparam actorStyle awesome
-:cuber:  --> (cube): solve\nfast!
-:cuber: -> (timer)
-  (competition) <- :cuber:
-@enduml

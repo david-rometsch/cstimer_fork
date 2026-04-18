@@ -1020,7 +1020,7 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
     function st(pos, co) {
       if (pos < 4) {
         if (co === 0) return 0;
-        if (co === 2 && (pos === 1 || pos === 3)) return 2;
+        if ((co === 2 && pos === 1) || (co === 1 && pos === 3)) return 2;
         return 1;
       }
       return co === 0 ? 4 : 3;
@@ -1051,7 +1051,7 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
             co = sN(co, 0, oa);
             co = sN(co, t1, ob);
             co = sN(co, t2, oc);
-            bld3cByCat[cat(st(t1, ob), st(t2, oc))].push([cp, co]); //NOTE: here the cases are added to bld3cByCat and categorized at the same time
+            bld3cByCat[cat(st(t1, oa), st(t2, (oa + ob) % 3))].push([cp, co]); //NOTE: here the cases are added to bld3cByCat and categorized at the same time
           }
         }
       }
@@ -1113,6 +1113,43 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
         neut,
       );
     };
+  }
+
+  // 3BLD multi-cycle with mixed categories: user selects which categories to include via checkboxes
+  function make3BLDMultiCatCycle(type, length, cases, neut) {
+    var pool = [];
+    for (var i = 0; i < 8; i++) {
+      if (!cases || cases[i]) {
+        pool = pool.concat(bld3cByCat[i]);
+      }
+    }
+    if (pool.length === 0) return "U U'";
+    var used = {};
+    var cpResult = 0x76543210,
+      coResult = 0x00000000;
+    while (true) {
+      var valid = [];
+      for (var i = 0; i < pool.length; i++) {
+        var t1 = nibble(pool[i][0], 0);
+        var t2 = nibble(pool[i][0], t1);
+        if (!used[t1] && !used[t2]) valid.push(pool[i]);
+      }
+      if (valid.length === 0) break;
+      var c = valid[rn(valid.length)];
+      var t1 = nibble(c[0], 0);
+      var t2 = nibble(c[0], t1);
+      used[t1] = used[t2] = true;
+      var comp = composeCycles(cpResult, coResult, c[0], c[1]);
+      cpResult = comp[0];
+      coResult = comp[1];
+    }
+    return getAnyScramble(
+      0xba9876543210,
+      0x000000000000,
+      cpResult,
+      coResult,
+      neut,
+    );
   }
 
   function getPLLImage(cases, canvas) {
@@ -1628,7 +1665,11 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
   )("3bldmc4", make3BLDMultiCycle(4))("3bldmc5", make3BLDMultiCycle(5))(
     "3bldmc6",
     make3BLDMultiCycle(6),
-  )("3bldmc7", make3BLDMultiCycle(7))("oll", getOLLScramble, [
+  )("3bldmc7", make3BLDMultiCycle(7))(
+    "3bldmcmulti",
+    make3BLDMultiCatCycle,
+    [bld3cFilter, [0, 0, 0, 0, 0, 0, 0, 0]],
+  )("oll", getOLLScramble, [
     ollfilter,
     ollprobs,
     getOLLImage,

@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "9a567a1888319354",
+    "type": "split",
+    "children": [
+      {
+        "id": "1d7d02fa2eb9e23a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e6308598092c02ea",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "5117cb1ba5065926",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "UI-UX/Transferarbeit.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Transferarbeit"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6e2ed6c0d5cc485d",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "12076ad78920e773",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical",
+            "autoReveal": false
+          },
+          "icon": "lucide-folder-closed",
+          "title": "Files"
+        }
+      },
+      {
+        "id": "048f64f7f4d2d6d6",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "Svelte",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-search",
+          "title": "Search"
+        }
+      },
+      {
+        "id": "9be5840dbd292030",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-tags",
+          "title": "Tags"
+        }
+      },
+      {
+        "id": "545dfb14712aeee4",
+        "type": "leaf",
+        "state": {
+          "type": "all-properties",
+          "state": {
+            "sortOrder": "frequency",
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-archive",
+          "title": "All properties"
+        }
+      },
+      {
+        "id": "ecf0472812b6ca7e",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {},
+          "icon": "lucide-bookmark",
+          "title": "Bookmarks"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "87483bb9b4f507fc",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "16f4a3a568e819d8",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "Untitled.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-coming-in",
+          "title": "Backlinks"
+        }
+      },
+      {
+        "id": "4117347fdd19b195",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "Untitled.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-going-out",
+          "title": "Outgoing links"
+        }
+      },
+      {
+        "id": "7edc7722a1cacba3",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "Untitled.md",
+            "followCursor": false,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-list",
+          "title": "Outline"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
+    }
+  },
+  "active": "e6308598092c02ea",
+  "lastOpenFiles": [
+    "UI-UX/Transferarbeit.pdf",
+    "webe-rometsch/docs/sv-vs-rct.puml",
+    "webe-rometsch/docs/svelte-vs-react.svg",
+    "webe-rometsch/docs/svelte-vs-react.puml",
+    "train-js/Filter and sort.md",
+    "svelte/tut-exmpl/svelte.config.js",
+    "svelte/my-app/jsconfig.json",
+    "svelte/tut-exmpl/README.md",
+    "svelte/tut-exmpl/exmpl2/shared.svelte.js",
+    "svelte/my-app/README.md",
+    "svelte/tut-exmpl/tsconfig.json",
+    "svelte/App.svelte",
+    "svelte/tut-exmpl/exmpl2/App.svelte",
+    "svelte/tut-exmpl/package.json",
+    "svelte/Counter.svelte",
+    "svelte/tut-exmpl/public/vite.svg",
+    "svelte/my-app/public/vite.svg",
+    "svelte/tut-exmpl/static/favicon.svg",
+    "svelte/my-app/src/assets/svelte.svg",
+    "mario-react/fastapi-react-next/README.md",
+    "train-js/Javascript.md",
+    "Tagebuch.md",
+    "sqlalchemy.md"
+  ]
+}
