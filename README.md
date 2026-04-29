@@ -1,4 +1,4 @@
-# csTimer — Fork by David Rometsch
+# csTimer-Fork by David Rometsch
 
 This is a fork of [cs0x7f/cstimer](https://github.com/cs0x7f/cstimer) extended with a **3BLD corner commutator scramble trainer**, developed as part of a Software Engineering project at TEKO Basel.
 
