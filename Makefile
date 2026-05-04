@@ -79,7 +79,6 @@ tools/onlinecomp.js \
 tools/battle.js \
 tools/syncseed.js \
 tools/bldhelper.js \
-tools/bldlptrainer.js \
 twisty/twistyreplay.js \
 shortcut.js \
 help.js \

@@ -257,12 +257,7 @@ var scrdata = [
       ["D-bottom + D-bottom", "3bldmc7", 0],
     ],
   ],
-  [
-    "3BLD multi-cycle (mixed)",
-    [
-      ["mixed categories", "3bldmcmulti", 0],
-    ],
-  ],
+  ["3BLD multi-cycle (mixed)", [["mixed categories", "3bldmcmulti", 0]]],
   [
     "3x3x3 CFOP",
     [
