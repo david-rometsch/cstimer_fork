@@ -992,7 +992,7 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
   // into 8 J-Perm categories based on sticker types of the two non-buffer targets.
   //
   // Sticker type of (pos, co):
-  //   U-layer (pos<4): co=0 → U-top; co=2 & pos∈{1,3} → LUF/BUR; else → U-side
+  //   U-layer (pos<4): co=0 → U-top; (co=1 & pos=1) or (co=2 & pos=3) → LUF/BUR; else → U-side
   //   D-layer (pos≥4): co=0 → D-bottom; else → D-side
   //
   // Category index (unordered pair of sticker types):
@@ -1003,14 +1003,14 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
   // NOTE: this is the scramble logic for single cycle
   var bld3cByCat = [[], [], [], [], [], [], [], []];
   var bld3cFilter = [
-    "U-side + D-any",
-    "U-top + D-side",
-    "U + U",
-    "D-side + D-side",
-    "U-top + D-bottom",
-    "LUF/BUR + D-any",
-    "D-side + D-bottom",
-    "D-bottom + D-bottom",
+    "U-side + D-any",      // 0
+    "U-top + D-side",      // 1
+    "U + U",               // 2
+    "D-side + D-side",     // 3
+    "U-top + D-bottom",    // 4
+    "LUF/BUR + D-any",     // 5
+    "D-side + D-bottom",   // 6
+    "D-bottom + D-bottom", // 7
   ];
   (function () {
     function sN(v, p, n) {
@@ -1020,7 +1020,7 @@ var scramble_333 = (function (getNPerm, setNPerm, getNParity, rn, rndEl) {
     function st(pos, co) {
       if (pos < 4) {
         if (co === 0) return 0;
-        if ((co === 2 && pos === 1) || (co === 1 && pos === 3)) return 2;
+        if ((co === 1 && pos === 1) || (co === 2 && pos === 3)) return 2;
         return 1;
       }
       return co === 0 ? 4 : 3;

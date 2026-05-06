@@ -1,4 +1,9 @@
-<?php
+<❯ ls
+192.168.178.140-key.pem  baidutongji.php  cache.manifest  css                 cstimer.webmanifest  index.html  js    oauthwca.php  test.php   userdata2.php  WcaOauth.php
+192.168.178.140.pem      bug.php          Caddyfile       cstimer512x512.png  hello-dave.txt       info.php    lang  sw.js         timer.php  userdata.php   wsServer.js
+
+╭─    ~/develop/cstimer_fork/dist.bak    android !1                                                                                                                   ✔  08:50:38 
+╰─?php
 	define('CSTIMER_USERDATA_LOGFILE', 'logfile');
 
 	if (!isset($_POST['id']) || empty($_POST['id']) || strlen($_POST['id']) >= 250) {

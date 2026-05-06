@@ -159,7 +159,9 @@ langPHP = $(addprefix $(dest)/lang/, $(shell ls $(src)/lang/ | grep .*\.php))
 
 version := $(shell git describe --tags --always 2>/dev/null || echo Unspecified)
 
+# all: $(cstimer) $(twisty) $(css) $(langJS) $(langPHP) version $(dest)/cache.manifest $(dest)/sw.js
 all: $(cstimer) $(twisty) $(css) $(langJS) $(langPHP) version $(dest)/cache.manifest $(dest)/sw.js
+	cd $(dest) && php timer.php > index.html
 
 module: $(cstimer_module)
 
@@ -167,8 +169,10 @@ version: $(langPHP)
 	@echo "Build Version: $(version)"
 	@sed -i 's/\$$version = "[^"]*"/\$$version = "$(version)"/g' $(dest)/lang/langDet.php
 
+# clean:
+# 	rm -f $(cstimer) $(twisty) $(css) $(langJS) $(langPHP)
 clean:
-	rm -f $(cstimer) $(twisty) $(css) $(langJS) $(langPHP)
+	rm -f $(cstimer) $(twisty) $(css) $(langJS) $(langPHP) $(dest)/index.html
 
 local: all
 	mkdir -p $(dest)/local/js $(dest)/local/css
